@@ -1,0 +1,65 @@
+<div class="wrapper">
+  <div class="container right-panel-active" id="container">
+    <div class="form-container sign-up-container">
+      <form id="sign-up-user" [formGroup]="signUpUser" (ngSubmit)="onSignUp()">
+        <h4 class="header">Sign Up</h4>
+        <div class="line"></div>
+        <p [ngClass]="{ 'has-error': isSignUpSubmitted && signUpFormControls.name.errors }">
+          <input type="text" placeholder="Name" required formControlName="name" id="user-icon" />
+        </p>
+        <p [ngClass]="{ 'has-error': isSignUpSubmitted && signUpFormControls.income.errors }">
+          <input
+            type="text"
+            placeholder="Income"
+            required
+            formControlName="income"
+            ng-maxlength="7"
+            id="income-icon"
+          />
+        </p>
+        <p *ngIf="signUpIncomeError" class="invalid-credentials">{{signUpIncomeErrorMessage}}</p>
+        <p [ngClass]="{ 'has-error': isSignUpSubmitted && signUpFormControls.email.errors }">
+          <input type="email" placeholder="Email" formControlName="email" id="email-icon_a" />
+        </p>
+        <p *ngIf="signUpEmailExists" class="invalid-credentials">This email is already in use</p>
+        <p [ngClass]="{ 'has-error': isSignUpSubmitted && signUpFormControls.password.errors }">
+          <input type="password" placeholder="Password" formControlName="password" id="password-icon_a" />
+        </p>
+        <input type="submit" value="sign up" class="register" />
+      </form>
+      <p style="color: #414464" id="signIn">Already have an account?</p>
+    </div>
+    <div class="form-container sign-in-container">
+      <form id="sign-in-user" [formGroup]="loginUser" (ngSubmit)="onLogin()">
+        <h4 class="header">Login</h4>
+        <div class="line"></div>
+        <p [ngClass]="{ 'has-error': isLoginSubmitted && loginFormControls.email.errors }">
+          <input type="email" placeholder="Email" formControlName="email" id="email-icon_b" />
+        </p>
+        <p [ngClass]="{ 'has-error': isLoginSubmitted && loginFormControls.password.errors }">
+          <input type="password" placeholder="Password" formControlName="password" id="password-icon_b" />
+        </p>
+        <input type="submit" value="login" />
+        <p *ngIf="invalidCredentials" class="invalid-credentials">Login failed, wrong email or password</p>
+      </form>
+    </div>
+    <div class="overlay-container">
+      <div class="overlay">
+        <div class="overlay-panel overlay-left">
+          <h4 class="title">Don't have an account?</h4>
+          <div class="line"></div>
+          <p>
+            Please create an account with us.
+          </p>
+          <button class="btn" id="signUp">sign up</button>
+        </div>
+        <div class="overlay-panel overlay-right">
+          <h4 class="title">Have an account?</h4>
+          <div class="line"></div>
+          <p>Access your Esto account.</p>
+          <button class="btn" id="signIn">login</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
